@@ -1,0 +1,122 @@
+@startuml
+class PlantsVsZombies
+class SistemaAudio
+class SistemaRender
+class SistemaInput
+class SistemaColisiones
+class SistemaJuego
+class InterfazUsuario
+class Tienda
+class Menu
+class GestorRecursos
+class ControladorInput
+class Tablero
+class Celda
+class GeneradorZombies
+class GeneradorSoles
+class Nivel
+class Puntaje
+class GameObject
+class Planta
+class Zombie
+class Proyectil
+class Sol
+class LanzaGuisantes
+class Girasol
+class PetaZeta
+class ApisonaFlor
+class ZombieBasico
+class ZombieCono
+class ZombieBalde
+ 
+
+interface IDefensible{
++recibirDano()
++obtenerVida()
++estaVivo()
++destruir()
+}
+interface IAtacante{
++atacar()
++obtenerDano()
++puedeAtacar()
++rangoAtaque()
+}
+interface IRecolectable{
++recolectar()
++obtenerValor()
++esRecolectable()
++desaparecer()
+}
+ 
+interface IControlable{
++procesarInput()
++ejecutarComando()
++obtenerEstado()
++actualizarControl()
+}
+interface IGestionable{
++gestionarRecurso()
++obtenerRecursos()
++asignarRecurso()
++liberarRecurso()
+}
+
+PlantsVsZombies *-- SistemaAudio
+PlantsVsZombies *-- SistemaRender
+PlantsVsZombies *-- SistemaInput
+PlantsVsZombies *-- SistemaColisiones
+PlantsVsZombies *-- SistemaJuego
+PlantsVsZombies *-- InterfazUsuario
+PlantsVsZombies *-- Tienda
+PlantsVsZombies *-- Menu
+PlantsVsZombies *-- GestorRecursos
+PlantsVsZombies *-- ControladorInput
+PlantsVsZombies *-- Tablero
+PlantsVsZombies *-- GeneradorZombies
+PlantsVsZombies *-- GeneradorSoles
+PlantsVsZombies *-- Nivel
+PlantsVsZombies *-- Puntaje
+
+Tablero o-- "45" Celda
+SistemaColisiones o-- "*" GameObject
+SistemaRender o-- "*" GameObject
+GeneradorZombies o-- "*" Zombie
+GeneradorSoles o-- "*" Sol
+Tienda o-- "*" Planta
+
+GameObject <-- Planta
+GameObject <-- Zombie
+GameObject <-- Proyectil
+GameObject <-- Sol
+
+Planta <-- LanzaGuisantes
+Planta <-- Girasol
+Planta <-- PetaZeta
+Planta <-- ApisonaFlor
+   
+ 
+
+Zombie <-- ZombieBasico
+Zombie <-- ZombieCono
+Zombie <-- ZombieBalde
+Zombie <-- ZombieFootball
+
+Celda o-- "0..1" Planta
+Celda o-- "0..*" Zombie
+
+LanzaGuisantes o-- "*" Proyectil
+Planta --> IAtacante
+Planta --> IDefensible
+Zombie --> IAtacante
+Sol --> IRecolectable
+ZombieBasico --> IDefensible
+ZombieCono --> IDefensible
+ZombieBalde --> IDefensible
+ZombieFootball --> IDefensible
+
+class ZombieFootball
+
+ControladorInput --> IControlable
+GestorRecursos --> IGestionable
+@enduml
