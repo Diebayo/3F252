@@ -28,7 +28,6 @@ class ApisonaFlor
 class ZombieBasico
 class ZombieCono
 class ZombieBalde
- 
 
 interface IDefensible{
 +recibirDano()
@@ -115,7 +114,7 @@ ZombieCono --> IDefensible
 ZombieBalde --> IDefensible
 ZombieFootball --> IDefensible
 
-class ZombieFootball
+class ZombieFootballsudo 
 
 ControladorInput --> IControlable
 GestorRecursos --> IGestionable
